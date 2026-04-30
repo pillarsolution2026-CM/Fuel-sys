@@ -1,5 +1,6 @@
 {
-  "name": "Remix: afro-group-fuel",
+  "name": " afro-group-fuel",
   "description": "An advanced, aesthetically pleasing React application to track car fuel consumption, calculate costs, and visualize efficiency trends using Gemini AI for insights.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": []
 }

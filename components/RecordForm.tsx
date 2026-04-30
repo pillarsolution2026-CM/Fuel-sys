@@ -29,6 +29,8 @@ const RecordForm: React.FC<Props> = ({ onAdd, lastEndOdometer, fixedFuelPrice, u
     }
   }, [formData.startOdometer, formData.endOdometer, fixedFuelPrice, consumptionRate]);
 
+  const [driverTypeSelection, setDriverTypeSelection] = useState<'regular' | 'custom'>('regular');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.endOdometer <= formData.startOdometer) {
@@ -88,7 +90,27 @@ const RecordForm: React.FC<Props> = ({ onAdd, lastEndOdometer, fixedFuelPrice, u
           </div>
         </div>
 
-        {userRole === 'custom' && (
+        {userRole === 'main' && (
+          <div>
+            <label className="block text-sm font-semibold text-slate-600 mb-1">نوع السائق</label>
+            <select
+              className="w-full px-4 py-2 rounded-lg border border-slate-200 focus:ring-2 focus:ring-emerald-500 outline-none transition-all font-bold text-slate-700"
+              value={driverTypeSelection}
+              onChange={(e) => {
+                const val = e.target.value as 'regular' | 'custom';
+                setDriverTypeSelection(val);
+                if (val === 'regular') {
+                  setConsumptionRate(12);
+                }
+              }}
+            >
+              <option value="regular">سائق عادي</option>
+              <option value="custom">سائق مخصص</option>
+            </select>
+          </div>
+        )}
+
+        {(userRole === 'custom' || (userRole === 'main' && driverTypeSelection === 'custom')) && (
           <div>
             <label className="block text-sm font-semibold text-slate-600 mb-1">معدل الاستهلاك (كم/لتر)</label>
             <select
